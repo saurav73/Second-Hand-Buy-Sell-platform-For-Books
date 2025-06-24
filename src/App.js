@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './Component/Login'
+import Signup from './Component/Signup'
+import HomePage from './Component/HomePage';
+import Aboutus from './Component/Aboutus'; 
+import Shop from './Component/Shop'; 
+import CartPage from './Component/CartPage';
+import BookSell from './Component/BookSell';
+import BookExchange from './Component/BookExchange';
+import BookDonate from './Component/BookDonate';
+import RegisterOrganization from './Component/RegisterOrganization';
+import RequestBook from './Component/RequestBook';
+import BookList from './Component/Booklist';
+import SearchPage from './Component/SearchPage';
+import { CartProvider } from './Component/CartContext'; 
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CartProvider> 
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup/>} />
+          <Route path="/about" element={<Aboutus />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/cart" element={<CartPage />} /> 
+          <Route path="/book-sell" element={<BookSell />} />
+          <Route path="/book-exchange" element={<BookExchange />} />
+          <Route path="/book-donate" element={<BookDonate />} />
+          <Route path="/register-organization" element={<RegisterOrganization />} />
+          <Route path="/request-book" element={<RequestBook />} />
+          <Route path="/book-list" element={<BookList />} />
+          <Route path="/search" element={<SearchPage />} />
+          {/* Add more routes as needed */}
+        </Routes>
+      </Router>
+    </CartProvider>
   );
 }
 
