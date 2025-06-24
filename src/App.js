@@ -14,6 +14,9 @@ import RequestBook from './Component/RequestBook';
 import BookList from './Component/Booklist';
 import SearchPage from './Component/SearchPage';
 import { CartProvider } from './Component/CartContext'; 
+import ForgetPassword from './Component/ForgetPassword';
+import Otp from './Component/Otp';
+import ChangePassword from './Component/ChangePassword';
 
 function App() {
   return (
@@ -33,6 +36,9 @@ function App() {
           <Route path="/request-book" element={<RequestBook />} />
           <Route path="/book-list" element={<BookList />} />
           <Route path="/search" element={<SearchPage />} />
+          <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="/otp" element={<Otp />} />
+          <Route path="/change-password" element={<ChangePassword />} />
           {/* Add more routes as needed */}
         </Routes>
       </Router>
