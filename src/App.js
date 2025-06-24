@@ -17,6 +17,7 @@ import { CartProvider } from './Component/CartContext';
 import ForgetPassword from './Component/ForgetPassword';
 import Otp from './Component/Otp';
 import ChangePassword from './Component/ChangePassword';
+import ViewDetails from './Component/ViewDetails';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/otp" element={<Otp />} />
           <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/view-details" element={<ViewDetails />} />
           {/* Add more routes as needed */}
         </Routes>
       </Router>

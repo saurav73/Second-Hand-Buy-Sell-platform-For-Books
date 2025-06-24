@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import UsedBooksSection from './UsedBooksSection';
@@ -7,6 +8,8 @@ import './HomePage.css';
 import './UsedBooksSection.css';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="homepage-container">
       <Navbar />
@@ -32,66 +35,53 @@ const HomePage = () => {
       <section className="best-picks fade-in delay-3">
         <h2>Our Best Picks</h2>
         <div className="book-grid">
-        
-          <div className="book-card">
-            <img
-              src="https://images.saymedia-content.com/.image/t_share/MTc0NDEzMzQ2ODY1NDI0MDA2/david-copperfield-by-charles-dickens-a-book-review.jpg"
-              alt="David Copperfield"
-              className="book-image"
-            />
-            <h3>David Copperfield</h3>
-            <p>
-              <strong>Author:</strong> Charles Dickens
-            </p>
-            <p>A coming-of-age story chronicling the life of David Copperfield.</p>
-            <p className="price">$14.99</p>
-            <button className="details-button">View Details</button>
-          </div>
-
-          <div className="book-card">
-            <img
-              src="https://images.saymedia-content.com/.image/t_share/MTgxMzEyODAwMDQ2NDU3OTU5/multiple-journeys-taken-by-deven-in-anita-desais-in-custody.jpg"
-              alt="In Custody"
-              className="book-image"
-            />
-            <h3>In Custody</h3>
-            <p>
-              <strong>Author:</strong> Anita Desai
-            </p>
-            <p>A teacher's literary journey with an aging Urdu poet.</p>
-            <p className="price">$13.49</p>
-            <button className="details-button">View Details</button>
-          </div>
-
-          <div className="book-card">
-            <img
-              src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1669512309i/63849929.jpg"
-              alt="It Ends With Us"
-              className="book-image"
-            />
-            <h3>It Ends With Us</h3>
-            <p>
-              <strong>Author:</strong> Colleen Hoover
-            </p>
-            <p>A compelling tale of love, strength, and resilience.</p>
-            <p className="price">$16.75</p>
-            <button className="details-button">View Details</button>
-          </div>
-
-          <div className="book-card">
-            <img
-              src="https://www.bookishelf.com/wp-content/uploads/2020/01/Book-Review-The-Book-Thief-by-Markus-Zusak-scaled.jpg"
-              alt="The Book Thief"
-              className="book-image"
-            />
-            <h3>The Book Thief</h3>
-            <p>
-              <strong>Author:</strong> Markus Zusak
-            </p>
-            <p>A young girl's relationship with books during Nazi Germany.</p>
-            <p className="price">$15.25</p>
-            <button className="details-button">View Details</button>
-          </div>
+          {[
+            {
+              title: 'David Copperfield',
+              author: 'Charles Dickens',
+              image: 'https://images.saymedia-content.com/.image/t_share/MTc0NDEzMzQ2ODY1NDI0MDA2/david-copperfield-by-charles-dickens-a-book-review.jpg',
+              category: 'Novel',
+              price: 14.99,
+              offer: 'Offer Ends December 31, 2024',
+              description: 'A coming-of-age story chronicling the life of David Copperfield.'
+            },
+            {
+              title: 'In Custody',
+              author: 'Anita Desai',
+              image: 'https://images.saymedia-content.com/.image/t_share/MTgxMzEyODAwMDQ2NDU3OTU5/multiple-journeys-taken-by-deven-in-anita-desais-in-custody.jpg',
+              category: 'Novel',
+              price: 13.49,
+              offer: 'Offer Ends December 31, 2024',
+              description: 'A teacher\'s literary journey with an aging Urdu poet.'
+            },
+            {
+              title: 'It Ends With Us',
+              author: 'Colleen Hoover',
+              image: 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1669512309i/63849929.jpg',
+              category: 'Novel',
+              price: 16.75,
+              offer: 'Offer Ends December 31, 2024',
+              description: 'A compelling tale of love, strength, and resilience.'
+            },
+            {
+              title: 'The Book Thief',
+              author: 'Markus Zusak',
+              image: 'https://www.bookishelf.com/wp-content/uploads/2020/01/Book-Review-The-Book-Thief-by-Markus-Zusak-scaled.jpg',
+              category: 'Novel',
+              price: 15.25,
+              offer: 'Offer Ends December 31, 2024',
+              description: 'A young girl\'s relationship with books during Nazi Germany.'
+            }
+          ].map((book, idx) => (
+            <div className="book-card" key={idx}>
+              <img src={book.image} alt={book.title} className="book-image" />
+              <h3>{book.title}</h3>
+              <p><strong>Author:</strong> {book.author}</p>
+              <p>{book.description}</p>
+              <p className="price">${book.price}</p>
+              <button className="details-button" onClick={() => navigate('/view-details', { state: { book } })}>View Details</button>
+            </div>
+          ))}
         </div>
       </section>
 
