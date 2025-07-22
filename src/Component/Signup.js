@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, Typography, Space } from 'antd';
-import { UserOutlined, MailOutlined, EyeOutlined, GoogleOutlined, FacebookOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Typography } from 'antd';
+import { UserOutlined, MailOutlined, EyeOutlined, GoogleOutlined } from '@ant-design/icons';
+import logo from '../Component/assests/hand-keep-book-read-source-600nw-1127076767-removebg-preview.png';
 
 const { Title, Text, Link } = Typography;
 
@@ -11,35 +12,39 @@ const Signup = () => {
   const onFinish = (values) => {
     setLoading(true);
     console.log('Signup values:', values);
-    // Implement your signup logic here
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   };
 
   return (
-    <div className="signup-container">
-      <div className="signup-content">
+    <div className="login-container">
+      <div className="login-content">
+        {/* Left Image Section */}
         <div className="books-section">
           <div className="books-stack" />
         </div>
 
-        <div className="signup-form-section">
-          <div className="signup-header">
+        {/* Right Signup Section */}
+        <div className="login-form-section">
+          <div className="login-header">
             <Title level={2} className="welcome-title">
               Join Book Bridge!
+              <img src={logo} alt="Book Bridge Logo" className="logo-image" />
             </Title>
             <Text className="welcome-description">
               Create your account and start enjoying the benefits of selling and exchanging books easily and efficiently.
             </Text>
           </div>
 
-          <Title level={3} className="signup-subtitle">Create Your Account</Title>
+          <Title level={3} className="login-subtitle">
+            Create Your Account
+          </Title>
 
           <Form
             form={form}
             name="signup_form"
-            className="signup-form"
+            className="login-form"
             onFinish={onFinish}
             layout="vertical"
           >
@@ -50,7 +55,7 @@ const Signup = () => {
               <Input
                 prefix={<UserOutlined className="input-icon" />}
                 placeholder="Full Name"
-                className="signup-input"
+                className="login-input"
               />
             </Form.Item>
 
@@ -61,7 +66,7 @@ const Signup = () => {
               <Input
                 prefix={<MailOutlined className="input-icon" />}
                 placeholder="Enter Email"
-                className="signup-input"
+                className="login-input"
                 suffix={<span className="email-suffix">@</span>}
               />
             </Form.Item>
@@ -73,7 +78,7 @@ const Signup = () => {
               <Input.Password
                 prefix={<EyeOutlined className="input-icon" />}
                 placeholder="Enter Password"
-                className="signup-input"
+                className="login-input"
                 iconRender={visible => <EyeOutlined className="eye-icon" />}
               />
             </Form.Item>
@@ -96,34 +101,29 @@ const Signup = () => {
               <Input.Password
                 prefix={<EyeOutlined className="input-icon" />}
                 placeholder="Confirm Password"
-                className="signup-input"
+                className="login-input"
                 iconRender={visible => <EyeOutlined className="eye-icon" />}
               />
             </Form.Item>
 
             <div className="account-prompt">
               <Text>Already have an account?</Text>
-              <Link href="#" className="create-account-link">
+              <Link href="/login" className="create-account-link">
                 Login
               </Link>
             </div>
 
-            <div className="signup-buttons">
+            <div className="login-buttons">
               <Button
                 type="default"
                 icon={<GoogleOutlined />}
                 className="google-button"
               />
               <Button
-                type="default"
-                icon={<FacebookOutlined />}
-                className="facebook-button"
-              />
-              <Button
                 type="primary"
                 htmlType="submit"
                 loading={loading}
-                className="signup-button"
+                className="login-button"
               >
                 SIGN UP
               </Button>
@@ -132,24 +132,26 @@ const Signup = () => {
         </div>
       </div>
 
+      {/* Styles (copied and adapted from Login.js) */}
       <style jsx>{`
-        .signup-container {
+        .login-container {
           display: flex;
           justify-content: center;
           align-items: center;
           min-height: 100vh;
-          background-color: #fff;
+          background-color: #f7faff;
           padding: 20px;
         }
 
-        .signup-content {
+        .login-content {
           display: flex;
           width: 100%;
-          max-width: 1000px;
+          max-width: 1100px;
           background-color: #fff;
-          border-radius: 8px;
+          border-radius: 12px;
           overflow: hidden;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+          border: 1px solid #e6e9f0;
         }
 
         .books-section {
@@ -157,137 +159,135 @@ const Signup = () => {
           display: flex;
           justify-content: center;
           align-items: center;
+          background-color: #fff;
           padding: 40px;
         }
 
         .books-stack {
           width: 100%;
-          height: 400px;
+          height: 100%;
+          max-width: 400px;
           background-image: url('https://t3.ftcdn.net/jpg/03/41/64/12/360_F_341641286_3PsasOhbu2STmLNAfTwXx5dsmxRgZ3qT.jpg');
           background-size: contain;
           background-position: center;
           background-repeat: no-repeat;
         }
 
-        .signup-form-section {
-          flex: 1;
-          padding: 40px;
+        .login-form-section {
+          flex: 1.2;
+          padding: 50px;
           display: flex;
           flex-direction: column;
+          background-color: #f7faff;
         }
 
-        .signup-header {
+        .login-header {
           margin-bottom: 30px;
-          text-align: center;
+          text-align: left;
         }
 
         .welcome-title {
-          color: #D4A017 !important;
-          margin-bottom: 16px !important;
+          color: #16A2F1;
+          margin-bottom: 12px;
+          font-size: 2rem;
+          font-weight: 700;
           display: flex;
           align-items: center;
-          justify-content: center;
-          gap: 10px;
         }
-
+        .logo-image {
+          width: 40px;
+          height: 40px;
+          margin-left: 15px;
+        }
         .welcome-description {
-          color: #666;
-          font-size: 14px;
+          color: #555;
+          font-size: 1rem;
           line-height: 1.6;
-          margin-bottom: 20px;
-          text-align: center;
+          max-width: 450px;
         }
-
-        .signup-subtitle {
-          color: #D4A017 !important;
-          margin-bottom: 24px !important;
-          text-align: center;
+        .login-subtitle {
+          color: #16A2F1;
+          margin-bottom: 24px;
+          text-align: left;
+          font-size: 1.5rem;
+          font-weight: 600;
         }
-
-        .signup-form {
+        .login-form {
           width: 100%;
         }
-
-        .signup-input {
+        .login-input {
           height: 50px;
-          background-color: #FFE4B5 !important;
-          border: none !important;
-          border-radius: 8px !important;
-          font-size: 16px;
+          background-color: #e3f2fd;
+          border: 1px solid #bbdefb;
+          border-radius: 8px;
+          font-size: 1rem;
+          padding: 0 15px;
         }
-
+        .login-input .ant-input {
+          background-color: transparent !important;
+        }
         .input-icon {
-          color: #999;
-          margin-right: 8px;
+          color: #90caf9;
         }
-
         .email-suffix {
-          color: #999;
-          font-size: 18px;
+          color: #90caf9;
         }
-
         .eye-icon {
-          color: #999;
+          color: #90caf9;
         }
-
+        .form-actions {
+          text-align: right;
+          margin-bottom: 20px;
+        }
+        .forgot-password {
+          color: #555;
+          font-size: 0.9rem;
+        }
         .account-prompt {
           display: flex;
-          justify-content: center;
-          gap: 8px;
-          margin-bottom: 24px;
-          border-bottom: 1px solid #eee;
-          padding-bottom: 20px;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 25px;
         }
-
+        .account-prompt Text {
+          color: #555;
+          font-size: 0.9rem;
+        }
         .create-account-link {
-          color: #D4A017 !important;
-          font-weight: bold;
+          color: #007bff;
+          font-weight: 600;
+          font-size: 0.9rem;
         }
-
-        .signup-buttons {
+        .login-buttons {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
-
-        .google-button, .facebook-button {
-          width: 48px;
-          height: 48px;
+        .google-button {
+          background-color: #fff;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          height: 40px;
+          width: 50px;
           display: flex;
-          justify-content: center;
           align-items: center;
-          border-radius: 50%;
-          border: 1px solid #eee;
-          padding: 0;
-          font-size: 20px;
+          justify-content: center;
+          color: #db4437;
+          font-size: 1.2rem;
         }
-
-        .signup-button {
-          min-width: 120px;
-          height: 48px;
-          background-color: #D4A017 !important;
-          border-color: #D4A017 !important;
-          border-radius: 24px;
-          font-weight: bold;
-          font-size: 16px;
+        .login-button {
+          background-color: #28a745;
+          border-color: #28a745;
+          height: 40px;
+          border-radius: 8px;
+          font-size: 0.9rem;
+          font-weight: 600;
+          flex-grow: 1;
+          margin-left: 10px;
         }
-
-        @media (max-width: 768px) {
-          .signup-content {
-            flex-direction: column;
-          }
-
-          .books-section {
-            padding: 20px;
-          }
-
-          .books-stack {
-            height: 200px;
-          }
-
-          .signup-form-section {
-            padding: 20px;
-          }
+        .login-button:hover {
+          background-color: #218838;
+          border-color: #1e7e34;
         }
       `}</style>
     </div>

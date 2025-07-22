@@ -74,6 +74,13 @@ const BookList = () => {
   };
 
   const handlePurchase = (book) => {
+    // Check login status
+    const user = localStorage.getItem('user');
+    if (!user) {
+      alert('Please login or signup to add items to your cart.');
+      navigate('/login');
+      return;
+    }
     addToCart(book);
     navigate('/cart');
   };

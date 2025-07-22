@@ -32,14 +32,41 @@ const CartIcon = () => (
   </svg>
 );
 
+// Add UserProfileIcon SVG
+const UserProfileIcon = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="8" r="4" stroke="#374151" strokeWidth="2"/>
+    <path d="M4 20c0-2.21 3.582-4 8-4s8 1.79 8 4" stroke="#374151" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+);
+
 const Navbar = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [orgDropdownOpen, setOrgDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const listBookRef = useRef(null);
   const modalRef = useRef(null);
   const orgDropdownRef = useRef(null);
+
+  useEffect(() => {
+    // Check login status on mount
+    setIsLoggedIn(!!localStorage.getItem('user'));
+    // Listen for login/logout in other tabs
+    const handleStorage = () => setIsLoggedIn(!!localStorage.getItem('user'));
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
+
+  // Debug log
+  console.log('Navbar isLoggedIn:', isLoggedIn, 'localStorage user:', localStorage.getItem('user'));
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setIsLoggedIn(false);
+    navigate('/');
+  };
 
   const handleNavigation = (path) => {
     setIsModalOpen(false);
@@ -147,12 +174,48 @@ const Navbar = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </form>
-        <span className="icon" style={{ cursor: 'pointer' }}>
+        <span className="icon" onClick={() => handleNavigation('/notification')} style={{ cursor: 'pointer' }}>
           <NotificationIcon />
         </span>
         <span className="icon" onClick={() => handleNavigation('/cart')} style={{ cursor: 'pointer' }}>
           <CartIcon />
         </span>
+        {/* User Profile Icon */}
+        <span className="icon" onClick={() => handleNavigation('/profile')} style={{ cursor: 'pointer' }}>
+          <UserProfileIcon />
+        </span>
+        {/* Login/Signup Buttons (show only if not logged in) */}
+        {!isLoggedIn && (
+          <>
+            <button
+              className="login-btn"
+              style={{ marginLeft: 12, padding: '7px 18px', borderRadius: 6, border: '1px solid #1976d2', background: '#fff', color: '#1976d2', fontWeight: 500, cursor: 'pointer' }}
+              onClick={() => handleNavigation('/login')}
+              type="button"
+            >
+              Login
+            </button>
+            <button
+              className="signup-btn"
+              style={{ marginLeft: 8, padding: '7px 18px', borderRadius: 6, border: '1px solid #43a047', background: '#fff', color: '#43a047', fontWeight: 500, cursor: 'pointer' }}
+              onClick={() => handleNavigation('/signup')}
+              type="button"
+            >
+              Sign Up
+            </button>
+          </>
+        )}
+        {/* Logout Button (show only if logged in) */}
+        {isLoggedIn && (
+          <button
+            className="logout-btn"
+            style={{ marginLeft: 12, padding: '7px 18px', borderRadius: 6, border: '1px solid #d32f2f', background: '#fff', color: '#d32f2f', fontWeight: 500, cursor: 'pointer' }}
+            onClick={handleLogout}
+            type="button"
+          >
+            Logout
+          </button>
+        )}
       </div>
     </nav>
   );
