@@ -18,6 +18,8 @@ import ForgetPassword from './Component/ForgetPassword';
 import Otp from './Component/Otp';
 import ChangePassword from './Component/ChangePassword';
 import ViewDetails from './Component/ViewDetails';
+import BillingPage from './Component/BillingPage';
+import SuccessPage from './Component/SuccessPage';
 
 function App() {
   return (
@@ -41,6 +43,9 @@ function App() {
           <Route path="/otp" element={<Otp />} />
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/view-details" element={<ViewDetails />} />
+          <Route path="/billing" element={<BillingPage />} />
+          <Route path="/success" element={<SuccessPage />} />
+
           {/* Add more routes as needed */}
         </Routes>
       </Router>
